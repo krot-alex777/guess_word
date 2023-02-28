@@ -1,3 +1,7 @@
+import random
+
+word_list = ['математика', 'геометрия', 'информатика', 'программирование', 'питон', 'образование', 'телефон']
+
 def get_word():
     word = random.choice(word_list)
     return word.upper()
@@ -83,22 +87,22 @@ def play(word):
     guessed_words = []
     tries = 6
 
-    print('Давайте играть в угадайку слов!')
+    print('Давай сыграем в угадайку слов!')
     print(display_hangman(tries))
     print(word_completion)
     print()
 
     while not guessed and tries > 0:
-        guess = input('Введите букву или слово целиком: ').upper()
+        guess = input('Введи букву или слово целиком: ').upper()
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
-                print('Вы уже называли букву', guess)
+                print('Эта буква уже называлась', guess)
             elif guess not in word:
                 print('Буквы', guess, 'нет в слове.')
                 tries -= 1
                 guessed_letters.append(guess)
             else:
-                print('Отличная работа, буква', guess, 'присутствует в слове!')
+                print('Отлично, буква', guess, 'есть в слове!')
                 guessed_letters.append(guess)
                 word_as_list = list(word_completion)
                 indices = [i for i in range(len(word)) if word[i] == guess]
@@ -109,7 +113,7 @@ def play(word):
                     guessed = True
         elif len(guess) == len(word) and guess.isalpha():
             if guess in guessed_words:
-                print('Вы уже называли слово', guess)
+                print('Это слово уже называлось', guess)
             elif guess != word:
                 print('Слово', guess, 'не является верным.')
                 tries -= 1
@@ -118,14 +122,14 @@ def play(word):
                 guessed = True
                 word_completion = word
         else:
-            print('Введите букву или слово.')
+            print('Введи букву или слово.')
         print(display_hangman(tries))
         print(word_completion)
         print()
     if guessed:
-        print('Поздравляем, вы угадали слово! Вы победили!')
+        print('Поздравляю, ты угадал!')
     else:
-        print('Вы не угадали слово. Загаданным словом было ' + word + '. Может быть в следующий раз!')
+        print('Ты не угадал слово. Загаданным словом было ' + word + '. Может быть в следующий раз!')
 
 again = 'д'
 
